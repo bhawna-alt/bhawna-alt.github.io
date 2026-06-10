@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhawna Teerth</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f1117;
+  --ink-soft: #3a3d48;
+  --ink-muted: #7a7e8a;
+  --bg: #f6f5f0;
+  --surface: #ffffff;
+  --accent: #2b5ce6;
+  --accent-light: #dde6ff;
+  --accent-mid: #7ba3f5;
+  --teal: #1a8c72;
+  --teal-light: #d2f0e8;
+  --amber: #b8600c;
+  --amber-light: #fde9cc;
+  --border: rgba(15,17,23,0.1);
+  --border-strong: rgba(15,17,23,0.2);
+  --serif: 'DM Serif Display', serif;
+  --sans: 'DM Sans', sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+
+/* ───── NAV ───── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 56px;
+  background: rgba(246,245,240,0.88); backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.1rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+.nav-links { display: flex; gap: 0.25rem; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 400; color: var(--ink-muted);
+  text-decoration: none; padding: 0.3rem 0.65rem; border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover { background: var(--accent-light); color: var(--accent); }
+.nav-ai {
+  font-size: 0.8rem; font-weight: 500; color: var(--accent);
+  background: var(--accent-light); border: none; cursor: pointer;
+  padding: 0.35rem 0.9rem; border-radius: 20px; transition: background 0.2s;
+}
+.nav-ai:hover { background: var(--accent-mid); color: #fff; }
+
+/* ───── HERO ───── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 7rem 2rem 4rem; position: relative; overflow: hidden;
+}
+.hero-scatter {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.hero-dot {
+  position: absolute; border-radius: 50%;
+  animation: floatDot 8s ease-in-out infinite;
+}
+@keyframes floatDot {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(180deg); }
+}
+.hero-tagline {
+  font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); font-weight: 500; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.hero-name {
+  font-family: var(--serif); font-size: clamp(3.5rem, 10vw, 7rem);
+  line-height: 1; letter-spacing: -0.03em; color: var(--ink);
+  margin-bottom: 1rem;
+}
+.hero-name em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  font-size: 1rem; color: var(--ink-muted); max-width: 520px;
+  margin: 0 auto 2.5rem; line-height: 1.7;
+}
+.hero-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
+.pill {
+  font-size: 0.78rem; padding: 0.3rem 0.85rem; border-radius: 20px;
+  border: 0.5px solid var(--border-strong); color: var(--ink-soft);
+  background: var(--surface); font-weight: 400;
+}
+.pill.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.hero-scroll { font-size: 0.78rem; color: var(--ink-muted); display: flex; align-items: center; gap: 0.4rem; }
+.scroll-arrow { animation: bounce 2s ease-in-out infinite; display: inline-block; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+.rotate-text {
+  position: absolute; right: 3rem; top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 0.7rem; letter-spacing: 0.25em; color: var(--ink-muted);
+  text-transform: uppercase; transform-origin: right center;
+}
+
+/* ───── SECTIONS COMMON ───── */
+section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
+.section-label {
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+h2.section-title {
+  font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
+  margin-bottom: 3rem;
+}
+h2.section-title em { font-style: italic; color: var(--accent); }
+
+/* ───── ABOUT ───── */
+#about .about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+}
+.about-bio { font-size: 1.05rem; color: var(--ink-soft); line-height: 1.8; }
+.about-bio strong { color: var(--ink); font-weight: 500; }
+.about-facts { display: flex; flex-direction: column; gap: 0; }
+.fact-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.85rem 0; border-bottom: 0.5px solid var(--border);
+  font-size: 0.85rem;
+}
+.fact-label { color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; }
+.fact-val { color: var(--ink); font-weight: 500; text-align: right; }
+
+/* ───── CURRENT WORK ───── */
+#now { background: transparent; }
+.work-card {
+  background: var(--surface); border: 0.5px solid var(--border);
+  border-radius: 16px; padding: 2rem; margin-bottom: 1.5rem;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.work-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(43,92,230,0.08); }
+.work-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+}
+.work-card.teal::before { background: var(--teal); }
+.work-card.amber::before { background: var(--amber); }
+.work-status {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0.25rem 0.7rem; border-radius: 20px; margin-bottom: 1rem;
+}
+.status-active { background: var(--accent-light); color: var(--accent); }
+.status-teal { background: var(--teal-light); color: var(--teal); }
+.status-amber { background: var(--amber-light); color: var(--amber); }
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.work-card h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--ink); }
+.work-card .work-meta { font-size: 0.82rem; color: var(--ink-muted); margin-bottom: 1rem; }
+.work-card p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 1rem; }
+.work-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 10px;
+  background: var(--bg); border: 0.5px solid var(--border); color: var(--ink-soft);
+}
+
+/* stats strip */
+.stats-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 0.5px solid var(--border); border-radius: 12px;
+  overflow: hidden; margin-bottom: 1.5rem;
+}
+.stat-cell {
+  background: var(--surface); padding: 1.25rem 1rem; text-align: center;
+}
+.stat-num {
+  font-family: var(--serif); font-size: 1.8rem; color: var(--ink); display: block;
+  counter-reset: none;
+}
+.stat-desc { font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.15rem; }
+
+/* findings */
+.findings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.finding-card {
+  background: var(--bg); border: 0.5px solid var(--border); border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+.finding-num { font-family: var(--serif); font-size: 1.4rem; color: var(--accent); margin-bottom: 0.3rem; }
+.finding-text { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; }
+
+/* ───── SELECTED WORK ───── */
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-item {
+  display: grid; grid-template-columns: 60px 1fr;
+  gap: 1.5rem; padding: 1.75rem 0;
+  border-bottom: 0.5px solid var(--border);
+  align-items: start;
+}
+.exp-num {
+  font-family: var(--serif); font-size: 2rem; color: var(--border-strong);
+  line-height: 1; padding-top: 0.1rem;
+}
+.exp-content h3 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+.exp-content .exp-meta { font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 0.6rem; }
+.exp-content p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.65; }
+
+/* ───── SKILLS ───── */
+.skills-wrap { display: flex; flex-direction: column; gap: 2rem; }
+.skill-group-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--ink-muted); margin-bottom: 0.75rem; font-weight: 500;
+}
+.skill-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.skill-chip {
+  font-size: 0.82rem; padding: 0.35rem 0.85rem; border-radius: 20px;
+  background: var(--surface); border: 0.5px solid var(--border-strong);
+  color: var(--ink-soft); transition: all 0.15s;
+}
+.skill-chip:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+/* ───── COMMUNITY ───── */
+.community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.comm-card {
+  background: var(--surface); border: 0.5px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.comm-card:hover { border-color: var(--accent); }
+.comm-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+.comm-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
+.comm-card .comm-period { font-size: 0.75rem; color: var(--ink-muted); margin-bottom: 0.6rem; }
+.comm-card p { font-size: 0.83rem; color: var(--ink-soft); line-height: 1.6; }
+
+/* ───── NUMBERS ───── */
+#numbers { text-align: center; }
+.numbers-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border: 0.5px solid var(--border);
+  border-radius: 16px; overflow: hidden; margin-top: 1rem;
+}
+.number-cell {
+  background: var(--surface); padding: 2.5rem 1rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+.number-big {
+  font-family: var(--serif); font-size: 3rem; color: var(--accent);
+  line-height: 1; margin-bottom: 0.5rem;
+}
+.number-label { font-size: 0.78rem; color: var(--ink-muted); max-width: 120px; text-align: center; }
+
+/* ───── CONTACT ───── */
+#contact { text-align: center; padding-bottom: 8rem; }
+.contact-cta {
+  font-family: var(--serif); font-size: clamp(2rem,5vw,3.5rem);
+  line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2.5rem;
+}
+.contact-cta em { font-style: italic; color: var(--accent); }
+.contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.contact-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.88rem; font-weight: 500; padding: 0.7rem 1.4rem;
+  border-radius: 30px; text-decoration: none; transition: all 0.2s;
+}
+.contact-link.primary {
+  background: var(--ink); color: #fff;
+}
+.contact-link.primary:hover { background: var(--accent); }
+.contact-link.secondary {
+  background: transparent; color: var(--ink);
+  border: 0.5px solid var(--border-strong);
+}
+.contact-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ───── FOOTER ───── */
+footer {
+  border-top: 0.5px solid var(--border); padding: 1.5rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.75rem; color: var(--ink-muted);
+  max-width: 100%;
+}
+
+/* ───── AI CHAT WIDGET ───── */
+.ai-fab {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--accent); color: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; box-shadow: 0 4px 20px rgba(43,92,230,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ai-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(43,92,230,0.45); }
+.ai-panel {
+  position: fixed; bottom: 5.5rem; right: 2rem; z-index: 200;
+  width: 340px; background: var(--surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 8px 40px rgba(15,17,23,0.12);
+  display: none; flex-direction: column;
+}
+.ai-panel.open { display: flex; }
+.ai-header {
+  padding: 1rem 1.25rem; border-bottom: 0.5px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ai-header h4 { font-size: 0.88rem; font-weight: 600; }
+.ai-header span { font-size: 0.72rem; color: var(--ink-muted); }
+.ai-close { background: none; border: none; cursor: pointer; color: var(--ink-muted); font-size: 1rem; }
+.ai-messages {
+  flex: 1; overflow-y: auto; padding: 1rem 1.25rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  max-height: 280px;
+}
+.ai-msg { font-size: 0.83rem; line-height: 1.55; max-width: 85%; }
+.ai-msg.bot {
+  background: var(--bg); border-radius: 0 10px 10px 10px;
+  padding: 0.6rem 0.85rem; color: var(--ink-soft); align-self: flex-start;
+}
+.ai-msg.user {
+  background: var(--accent); color: #fff;
+  border-radius: 10px 0 10px 10px; padding: 0.6rem 0.85rem;
+  align-self: flex-end;
+}
+.ai-suggestions { padding: 0.5rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.ai-suggestion {
+  font-size: 0.78rem; padding: 0.4rem 0.75rem; border-radius: 20px;
+  background: var(--bg); border: 0.5px solid var(--border); color: var(--ink-soft);
+  cursor: pointer; text-align: left; transition: all 0.15s;
+}
+.ai-suggestion:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+.ai-input-row {
+  padding: 0.75rem 1.25rem; border-top: 0.5px solid var(--border);
+  display: flex; gap: 0.5rem;
+}
+.ai-input {
+  flex: 1; border: 0.5px solid var(--border-strong); border-radius: 20px;
+  padding: 0.4rem 0.85rem; font-size: 0.82rem; font-family: var(--sans);
+  background: var(--bg); color: var(--ink); outline: none;
+}
+.ai-input:focus { border-color: var(--accent); }
+.ai-send {
+  background: var(--accent); color: #fff; border: none; border-radius: 50%;
+  width: 30px; height: 30px; cursor: pointer; font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ───── TYPING DOT ───── */
+.typing { display: flex; gap: 4px; align-items: center; padding: 0.5rem; }
+.typing span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--ink-muted);
+  animation: typing 1.2s ease-in-out infinite;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing { 0%,80%,100%{opacity:0.3;transform:translateY(0)} 40%{opacity:1;transform:translateY(-4px)} }
+
+/* count-up number */
+.count-target { display: inline-block; }
+
+/* ───── RESPONSIVE ───── */
+@media(max-width:680px){
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .community-grid { grid-template-columns: 1fr; }
+  .numbers-grid { grid-template-columns: repeat(2,1fr); }
+  .stats-strip { grid-template-columns: repeat(2,1fr); }
+  .findings-grid { grid-template-columns: 1fr; }
+  .ai-panel { width: calc(100vw - 2rem); right: 1rem; }
+  .rotate-text { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Bhawna Teerth</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#now">Now</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#community">Community</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-ai" onclick="toggleAI()">✦ Ask AI</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%;padding-top:6rem;">
+  <div class="hero-scatter" id="scatter"></div>
+  <div class="hero-tagline">✦ Chemistry · Computer Science · Honors</div>
+  <h1 class="hero-name">Bhawna<br><em>Teerth</em></h1>
+  <p class="hero-sub">researcher · builder · problem-solver<br>UMass Amherst · Class of 2028</p>
+  <div class="hero-pills">
+    <span class="pill accent">BS Chemistry</span>
+    <span class="pill accent">BS Computer Science</span>
+    <span class="pill">Honors College</span>
+    <span class="pill">IT Minor</span>
+    <span class="pill">ML Fellow · Cornell</span>
+    <span class="pill">iCons Scholar</span>
+  </div>
+  <div class="hero-scroll">scroll to explore <span class="scroll-arrow">↓</span></div>
+  <div class="rotate-text">UMass Amherst · 2024–2028</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <h2 class="section-title">Where chemistry<br>meets <em>computation.</em></h2>
+  <div class="about-grid">
+    <div class="about-bio">
+      <p>I'm a <strong>dual-degree student</strong> at UMass Amherst — working simultaneously toward a BS in Chemistry and a BS in Computer Science, with a minor in Information Technology and membership in the Commonwealth Honors College.</p>
+      <br>
+      <p>I came in on Cambridge A Levels (Chemistry, CS, Math, Physics) and hit the ground running. My curiosity lives at the intersection of <strong>molecular science and machine learning</strong> — I'm pursuing an Honors Thesis on computational modeling and algorithmic approaches in molecular research.</p>
+      <br>
+      <p>I believe data and code are tools for understanding the physical world — and the physical world keeps making the data problems more interesting.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact-row"><span class="fact-label">University</span><span class="fact-val">UMass Amherst</span></div>
+      <div class="fact-row"><span class="fact-label">Major 1</span><span class="fact-val">Chemistry (BS)</span></div>
+      <div class="fact-row"><span class="fact-label">Major 2</span><span class="fact-val">Computer Science (BS)</span></div>
+      <div class="fact-row"><span class="fact-label">Minor</span><span class="fact-val">Information Technology</span></div>
+      <div class="fact-row"><span class="fact-label">Honors</span><span class="fact-val">Commonwealth Honors College</span></div>
+      <div class="fact-row"><span class="fact-label">Graduation</span><span class="fact-val">May 2028</span></div>
+      <div class="fact-row"><span class="fact-label">GPA</span><span class="fact-val">3.918 / 4.00</span></div>
+      <div class="fact-row"><span class="fact-label">Transfer</span><span class="fact-val">Cambridge A Levels</span></div>
+      <div class="fact-row"><span class="fact-label">Thesis focus</span><span class="fact-val">ML × Molecular Research</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOW -->
+<section id="now" style="max-width:900px;margin:0 auto;padding:6rem 2rem;">
+  <div class="section-label">Current</div>
+  <h2 class="section-title">What I'm working on <em>right now.</em></h2>
+
+  <!-- ML Research -->
+  <div class="work-card">
+    <div class="work-status status-active"><span class="status-dot"></span> In Progress · Jan 2026 – Present</div>
+    <h3>ML & Graph Analysis — Prof. Scott M. Auerbach Lab</h3>
+    <div class="work-meta">Undergraduate Research Assistant · UMass Amherst · Provost Professor of Chemistry & Chemical Engineering</div>
+    <p>Modeling 10,000+ atom molecular simulations as graph networks for ML pipelines. Engineered a feature extraction pipeline using structured data transformations — translating the physical chemistry of molecular systems into representations a neural network can actually learn from.</p>
+    <div class="work-tags">
+      <span class="tag">Graph Neural Networks</span><span class="tag">Python</span>
+      <span class="tag">Molecular Simulation</span><span class="tag">Feature Engineering</span>
+      <span class="tag">Data Pipelines</span>
+    </div>
+  </div>
+
+  <!-- Cornell ML -->
+  <div class="work-card teal">
+    <div class="work-status status-teal"><span class="status-dot"></span> Fellowship · May 2026 – May 2027</div>
+    <h3>Breakthrough Tech AI — Cornell University</h3>
+    <div class="work-meta">AI Program Fellow | ML Foundations + AI Studio · Nationally competitive selection</div>
+    <p>One of a select cohort chosen for Cornell's year-long AI fellowship. Completing Cornell-certified ML Foundations curriculum (12–15 hrs/week) — data pipelines, model training, validation with industry-standard tools — then deploying into team-based AI Studio challenges with leading tech companies in Fall 2026 and Spring 2027.</p>
+    <p style="margin-top:0.5rem">Includes 1:1 mentorship from senior ML engineers, career coaching, and internship placement support. Earns a Cornell University Certificate in Machine Learning.</p>
+    <div class="work-tags">
+      <span class="tag">Machine Learning</span><span class="tag">Python</span>
+      <span class="tag">AI Studio</span><span class="tag">Cornell Certified</span>
+      <span class="tag">Industry Mentorship</span><span class="tag">Data Pipelines</span>
+    </div>
+  </div>
+
+  <!-- Honors Thesis -->
+  <div class="work-card amber">
+    <div class="work-status status-amber"><span class="status-dot"></span> Ongoing</div>
+    <h3>Honors Thesis — Computational Modeling × AI</h3>
+    <div class="work-meta">Commonwealth Honors College · UMass Amherst</div>
+    <p>Pursuing an Honors Thesis at the intersection of computational modeling, data science, and artificial intelligence in molecular research — asking whether algorithmic approaches can surface new patterns in complex chemical systems.</p>
+    <div class="work-tags">
+      <span class="tag">Computational Chemistry</span><span class="tag">AI</span>
+      <span class="tag">Data Science</span><span class="tag">Research</span>
+    </div>
+  </div>
+
+  <!-- Peer Mentor -->
+  <div class="work-card">
+    <div class="work-status status-active"><span class="status-dot"></span> Ongoing · July 2025 – Present</div>
+    <h3>Peer Mentor — UMass Residential Life</h3>
+    <div class="work-meta">Mentoring 15–20 first-year students</div>
+    <p>First point of contact for first-year residents navigating the academic and social transition into university life. Provides academic, personal, and logistical support while maintaining a safe and welcoming residential environment.</p>
+    <div class="work-tags">
+      <span class="tag">Mentorship</span><span class="tag">Leadership</span>
+      <span class="tag">Conflict Resolution</span><span class="tag">Community Building</span>
+    </div>
+  </div>
+</section>
+
+<!-- WORK / EXPERIENCE -->
+<section id="work">
+  <div class="section-label">Experience</div>
+  <h2 class="section-title">Experiments in <em>curiosity.</em></h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-num">01</div>
+      <div class="exp-content">
+        <h3>iCons Scholar — AI & the Future of Work</h3>
+        <div class="exp-meta">Integrated Concentration in STEM · Fall 2024 – Present</div>
+        <p>Participating in 20-credit interdisciplinary training focused on solving real-world challenges involving AI and emerging technology. Collaborating across STEM, business, and policy to develop research-driven solutions.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-num">02</div>
+      <div class="exp-content">
+        <h3>AI Engineering Fellow — CodePath</h3>
+        <div class="exp-meta">Applied AI Engineering Pathway · Feb 2026 – Apr 2026</div>
+        <p>Built AI-powered software systems integrating LLM-based APIs. Practiced AI-assisted development, debugging, and system design through structured applied engineering challenges.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-num">03</div>
+      <div class="exp-content">
+        <h3>Research Assistant — Soil & Watershed Hydrology</h3>
+        <div class="exp-meta">Riccio College of Engineering · Prof. Christian D. Guzman · Aug–Dec 2025</div>
+        <p>Analyzed 1,000+ environmental sensor records (temperature, moisture, watershed metrics). Performed data cleaning, preprocessing, and quality control workflows to improve the research team's pipeline efficiency.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-num">04</div>
+      <div class="exp-content">
+        <h3>Digital Empathy Coach — HackUMass XII</h3>
+        <div class="exp-meta">Team Developer · Nov 2025 (36-hour sprint)</div>
+        <p>Developed an AI-powered prototype in a 36-hour agile sprint. Contributed 10+ Git commits in a collaborative 4-engineer team environment — design, build, and ship in a single weekend.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-num">05</div>
+      <div class="exp-content">
+        <h3>CICSoft — Computer Science Club</h3>
+        <div class="exp-meta">Member · Aug 2025 – Present</div>
+        <p>Collaborating with 4–6 developers on GitHub-based software projects, contributing features through 5+ pull requests. Maintaining team workflows and reviewing code across a real collaborative engineering environment.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Toolkit</div>
+  <h2 class="section-title">The tools I <em>reach for.</em></h2>
+  <div class="skills-wrap">
+    <div>
+      <div class="skill-group-label">Programming & Analysis</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Python</span><span class="skill-chip">Java</span>
+        <span class="skill-chip">MATLAB</span><span class="skill-chip">SQL (basic)</span>
+        <span class="skill-chip">R</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">AI & Machine Learning</div>
+      <div class="skill-chips">
+        <span class="skill-chip">ML Model Training</span><span class="skill-chip">LLM APIs</span>
+        <span class="skill-chip">Graph Neural Networks</span><span class="skill-chip">NLP</span>
+        <span class="skill-chip">RAG</span><span class="skill-chip">AI-assisted Development</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Data & Research</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Data Cleaning & Validation</span><span class="skill-chip">Statistical Modeling</span>
+        <span class="skill-chip">Quantitative Analysis</span><span class="skill-chip">Feature Extraction</span>
+        <span class="skill-chip">Excel</span><span class="skill-chip">Scientific Documentation</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Tools & Practices</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Git & GitHub</span><span class="skill-chip">Reproducible Workflows</span>
+        <span class="skill-chip">Agile Development</span><span class="skill-chip">Claude (Anthropic)</span>
+        <span class="skill-chip">Quality Control</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Sciences</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Organic Chemistry</span><span class="skill-chip">Physical Chemistry</span>
+        <span class="skill-chip">Inorganic Chemistry</span><span class="skill-chip">Quantitative Analysis</span>
+        <span class="skill-chip">Molecular Simulation</span><span class="skill-chip">Environmental Sensing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="section-label">Community</div>
+  <h2 class="section-title">Where I <em>give back.</em></h2>
+  <div class="community-grid">
+    <div class="comm-card">
+      <div class="comm-icon">🧪</div>
+      <h4>iCons Research Community</h4>
+      <div class="comm-period">Fall 2024 – Present</div>
+      <p>Contributing to interdisciplinary STEM research that bridges computer science, policy, and social impact. Collaborating with students across majors to tackle real-world AI challenges.</p>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🏠</div>
+      <h4>Residential Life Mentor</h4>
+      <div class="comm-period">July 2025 – Present</div>
+      <p>Supporting 15–20 first-year students through their university transition. Building a welcoming community on the floor through communication and genuine care.</p>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">💻</div>
+      <h4>CICSoft Open Source</h4>
+      <div class="comm-period">Aug 2025 – Present</div>
+      <p>Contributing to collaborative software projects with fellow CS students at UMass. Learning team engineering practices through real GitHub-based workflows.</p>
+    </div>
+    <div class="comm-card">
+      <div class="comm-icon">🎓</div>
+      <h4>Honors College Seminars</h4>
+      <div class="comm-period">Fall 2025 – Present</div>
+      <p>Participating in the Commonwealth Honors College community — engaging with "Ideas That Change the World" and Honors Discovery Seminars alongside high-achieving peers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="section-label" style="justify-content:center;">By the numbers</div>
+  <h2 class="section-title" style="text-align:center;">The numbers, <em>plainly.</em></h2>
+  <div class="numbers-grid">
+    <div class="number-cell">
+      <div class="number-big"><span class="count-target" data-target="3.92">0</span></div>
+      <div class="number-label">Cumulative GPA / 4.00</div>
+    </div>
+    <div class="number-cell">
+      <div class="number-big"><span class="count-target" data-target="4" data-int="true">0</span></div>
+      <div class="number-label">Dean's List semesters</div>
+    </div>
+    <div class="number-cell">
+      <div class="number-big"><span class="count-target" data-target="4" data-int="true">0</span>×</div>
+      <div class="number-label">Perfect 4.0 term (Spring 2025)</div>
+    </div>
+    <div class="number-cell">
+      <div class="number-big"><span class="count-target" data-target="10000" data-int="true">0</span>+</div>
+      <div class="number-label">atoms modeled in ML pipelines</div>
+    </div>
+    <div class="number-cell">
+      <div class="number-big"><span class="count-target" data-target="1000" data-int="true">0</span>+</div>
+      <div class="number-label">sensor records analyzed</div>
+    </div>
+    <div class="number-cell">
+      <div class="number-big"><span class="count-target" data-target="2" data-int="true">0</span></div>
+      <div class="number-label">Bachelor's degrees (in progress)</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="justify-content:center;">Get in touch</div>
+  <div class="contact-cta">
+    The sky is the<br><em>starting line.</em>
+  </div>
+  <p style="color:var(--ink-muted);font-size:0.95rem;margin-bottom:2rem;">Open to research collaborations, ML internships, and anything at the edge of chemistry and computation.</p>
+  <div class="contact-links">
+    <a class="contact-link primary" href="mailto:bhawna@umass.edu">✉ bhawna@umass.edu</a>
+    <a class="contact-link secondary" href="https://www.linkedin.com/in/bhawnateerth" target="_blank">LinkedIn ↗</a>
+    <a class="contact-link secondary" href="https://github.com/bhawna-alt" target="_blank">GitHub ↗</a>
+    <a class="contact-link secondary" href="tel:4133150815">+1 (413) 315-0815</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Bhawna Teerth · Chemistry & CS · UMass Amherst · Class of 2028</span>
+  <a href="#" style="color:var(--ink-muted);text-decoration:none;">↑ back to top</a>
+</footer>
+
+<!-- AI CHAT -->
+<button class="ai-fab" onclick="toggleAI()" title="Ask AI about Bhawna">✦</button>
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-header">
+    <div>
+      <h4>Ask Bhawna's AI</h4>
+      <span>answers in her voice</span>
+    </div>
+    <button class="ai-close" onclick="toggleAI()">✕</button>
+  </div>
+  <div class="ai-messages" id="aiMessages">
+    <div class="ai-msg bot">Hi! I'm Bhawna's AI assistant. Ask me anything about her research, coursework, or goals. ✦</div>
+  </div>
+  <div class="ai-suggestions" id="aiSuggestions">
+    <button class="ai-suggestion" onclick="askQuestion('Tell me about yourself')">Tell me about yourself</button>
+    <button class="ai-suggestion" onclick="askQuestion('What research are you doing?')">What research are you doing?</button>
+    <button class="ai-suggestion" onclick="askQuestion('What roles are you looking for?')">What roles are you looking for?</button>
+    <button class="ai-suggestion" onclick="askQuestion('What are your top accomplishments?')">What are your top accomplishments?</button>
+  </div>
+  <div class="ai-input-row">
+    <input class="ai-input" id="aiInput" type="text" placeholder="Ask something…" onkeydown="if(event.key==='Enter')sendAI()">
+    <button class="ai-send" onclick="sendAI()">→</button>
+  </div>
+</div>
+
+<script>
+/* ─ Scatter dots ─ */
+const scatter = document.getElementById('scatter');
+const colors = ['#dde6ff','#d2f0e8','#fde9cc','#f6f5f0','#eee8ff'];
+for(let i=0;i<18;i++){
+  const d = document.createElement('div');
+  const size = Math.random()*60+8;
+  d.className = 'hero-dot';
+  d.style.cssText = `
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;top:${Math.random()*100}%;
+    background:${colors[i%colors.length]};
+    opacity:${Math.random()*0.5+0.2};
+    animation-delay:${Math.random()*4}s;
+    animation-duration:${Math.random()*4+6}s;
+  `;
+  scatter.appendChild(d);
+}
+
+/* ─ Count-up ─ */
+function countUp(el){
+  const target = parseFloat(el.dataset.target);
+  const isInt = el.dataset.int==='true';
+  const duration = 1800;
+  const start = performance.now();
+  function step(now){
+    const p = Math.min((now-start)/duration,1);
+    const ease = 1-Math.pow(1-p,3);
+    const val = ease*target;
+    el.textContent = isInt ? Math.round(val).toLocaleString() : val.toFixed(2);
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.count-target').forEach(countUp);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+document.getElementById('numbers') && obs.observe(document.getElementById('numbers'));
+
+/* ─ AI Chat ─ */
+const SYSTEM_PROMPT = `You are an AI assistant speaking as Bhawna Teerth — a UMass Amherst junior pursuing dual BS degrees in Chemistry and Computer Science, with a minor in Information Technology and membership in the Commonwealth Honors College. Respond in first-person, as Bhawna, in a confident, warm, and intellectually curious tone. Keep answers concise (2-4 sentences). Here are key facts: GPA 3.918, Dean's List all 4 semesters, Chancellor's Award recipient. She's an ML fellow at Cornell's Breakthrough Tech AI program. She does undergraduate research with Prof. Scott Auerbach on graph neural networks for molecular simulations. She was a CodePath AI Engineering Fellow (LLM APIs), a Research Assistant in Soil & Watershed Hydrology, and co-developed an AI prototype at HackUMass XII. Her Honors Thesis is on computational modeling and AI in molecular research. Skills: Python, Java, MATLAB, ML, NLP, RAG, Git. Contact: bhawna@umass.edu, LinkedIn: bhawnateerth, GitHub: bhawna-alt. She's open to ML internships and research collaborations.`;
+
+let panelOpen = false;
+function toggleAI(){
+  panelOpen=!panelOpen;
+  document.getElementById('aiPanel').classList.toggle('open',panelOpen);
+  if(panelOpen) document.getElementById('aiInput').focus();
+}
+
+function askQuestion(q){
+  document.getElementById('aiSuggestions').style.display='none';
+  document.getElementById('aiInput').value=q;
+  sendAI();
+}
+
+async function sendAI(){
+  const input = document.getElementById('aiInput');
+  const q = input.value.trim();
+  if(!q) return;
+  input.value='';
+  document.getElementById('aiSuggestions').style.display='none';
+  addMsg(q,'user');
+  const typing = addTyping();
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:200,
+        system: SYSTEM_PROMPT,
+        messages:[{role:'user',content:q}]
+      })
+    });
+    const data = await res.json();
+    typing.remove();
+    const text = data.content?.find(b=>b.type==='text')?.text || "I'm not sure about that one — try emailing me at bhawna@umass.edu!";
+    addMsg(text,'bot');
+  } catch(e){
+    typing.remove();
+    addMsg("Hmm, something went wrong. Reach me directly at bhawna@umass.edu!",'bot');
+  }
+}
+
+function addMsg(text,role){
+  const msgs = document.getElementById('aiMessages');
+  const div = document.createElement('div');
+  div.className=`ai-msg ${role}`;
+  div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+function addTyping(){
+  const msgs = document.getElementById('aiMessages');
+  const div = document.createElement('div');
+  div.className='ai-msg bot';
+  div.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+</script>
+</body>
+</html>
