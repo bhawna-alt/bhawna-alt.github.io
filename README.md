@@ -84,6 +84,23 @@ To update your content (new project, new job, GPA, etc.), edit **`js/data.js`** 
 
 ---
 
-## 5. Viewing in Chrome
+## 5. (Optional) Enable real live chat with Tawk.to
+
+The chat widget has a "Chat with me live" bar built in, but it needs a free [Tawk.to](https://www.tawk.to) account to actually work:
+
+1. Sign up free at [tawk.to](https://www.tawk.to) and create a property for your site.
+2. In your Tawk dashboard, find your embed code (shown right after signup, or under **Administration → Channels → Chat Widget**). It'll look like:
+   ```
+   https://embed.tawk.to/PROPERTY_ID/WIDGET_ID
+   ```
+3. Open `index.html`, find the Tawk.to script near the bottom (search for `YOUR_TAWK_PROPERTY_ID`), and replace `YOUR_TAWK_PROPERTY_ID` and `YOUR_TAWK_WIDGET_ID` with your own two values from that URL.
+4. Install the **Tawk.to app** (iOS/Android) and log in — you'll get a notification and can reply in real time whenever someone clicks "Chat with me live" on your site.
+5. When you're online in the Tawk app, the button automatically shows a green "I'm online" indicator; when you're offline, visitors can leave a message that gets emailed to you.
+
+Commit and push the updated `index.html` afterward so the live version picks it up.
+
+---
+
+## 6. Viewing in Chrome
 
 Once deployed (GitHub Pages or Vercel), just open the live URL in Chrome — no extra setup needed. For local preview before deploying, use the local server command in step 1 and open `http://localhost:8000` in Chrome.

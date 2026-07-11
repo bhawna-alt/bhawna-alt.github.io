@@ -248,5 +248,55 @@
     return "That's a great question! I'm running in offline demo mode right now, so my answers are limited to Bhawna's resume data — try asking about her projects, skills, research, education, or contact info. For anything else, feel free to email her directly at " + D.email + ".";
   }
 
+  // ---------------- Live chat handoff (Tawk.to) ----------------
+  // Opens the real, human live-chat widget (see the Tawk.to script near the end
+  // of index.html) from a button inside this AI panel, and reflects Bhawna's
+  // real online/offline status once Tawk has loaded.
+  function initLiveChat() {
+    const liveBar = document.getElementById("chatLiveBar");
+    const liveDot = document.getElementById("chatLiveDot");
+    const liveLabel = document.getElementById("chatLiveLabel");
+    if (!liveBar) return;
+
+    liveBar.addEventListener("click", () => {
+      if (window.Tawk_API && typeof Tawk_API.maximize === "function") {
+        Tawk_API.showWidget();
+        Tawk_API.maximize();
+      } else {
+        // Tawk hasn't loaded yet (slow connection, ad-blocker, or not configured) —
+        // fall back to email so the visitor is never stuck.
+        window.location.href = "mailto:" + D.email + "?subject=Let's chat!";
+      }
+    });
+
+    function reflectStatus() {
+      if (!window.Tawk_API || typeof Tawk_API.getStatus !== "function") return;
+      const status = Tawk_API.getStatus(); // 'online' | 'away' | 'offline'
+      if (status === "online") {
+        liveDot.classList.add("online");
+        liveLabel.textContent = "I'm online — chat with me now";
+      } else {
+        liveDot.classList.remove("online");
+        liveLabel.textContent = "Leave me a message";
+      }
+    }
+
+    // Poll briefly for Tawk_API to finish loading, then check status live
+    let attempts = 0;
+    const poll = setInterval(() => {
+      attempts++;
+      if (window.Tawk_API && typeof Tawk_API.getStatus === "function") {
+        reflectStatus();
+        if (typeof Tawk_API.onStatusChange !== "undefined") {
+          Tawk_API.onStatusChange = reflectStatus;
+        }
+        clearInterval(poll);
+      } else if (attempts > 20) {
+        clearInterval(poll); // give up after ~10s; button still works via fallback
+      }
+    }, 500);
+  }
+
   init();
+  initLiveChat();
 })();

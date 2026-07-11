@@ -234,6 +234,11 @@
         </div>
       </div>
     </div>
+    <button type="button" class="chat-live-bar" id="chatLiveBar">
+      <span class="chat-live-dot" id="chatLiveDot"></span>
+      <span id="chatLiveLabel">Chat with me live</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
     <div class="chat-messages" id="chatMessages"></div>
     <div class="chat-suggestions" id="chatSuggestions"></div>
     <form class="chat-input-row" id="chatForm">
@@ -250,5 +255,30 @@
 <script src="js/render.js"></script>
 <script src="js/main.js"></script>
 <script src="js/chatbot.js"></script>
+
+<!--
+  Tawk.to live chat (free real-time chat + mobile app so you get notified and
+  can reply from your phone). Already connected to Bhawna's Tawk.to property
+  below. Make sure the Tawk.to mobile app (iOS/Android) is installed and logged
+  in so you get notified and can chat live with visitors in real time.
+  The widget's own floating bubble is hidden (Tawk_API.hideWidget()) — it only
+  opens when a visitor clicks "Chat with me live" inside the AI chat panel,
+  handled in js/chatbot.js.
+-->
+<script type="text/javascript">
+var Tawk_API = Tawk_API || {};
+var Tawk_LoadStart = new Date();
+Tawk_API.onLoad = function () {
+  Tawk_API.hideWidget();
+};
+(function () {
+  var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+  s1.async = true;
+  s1.src = "https://embed.tawk.to/6a529de22facb31d4b96ad10/1jt9bhflj";
+  s1.charset = "UTF-8";
+  s1.setAttribute("crossorigin", "*");
+  s0.parentNode.insertBefore(s1, s0);
+})();
+</script>
 </body>
 </html>
